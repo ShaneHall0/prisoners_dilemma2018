@@ -7,10 +7,10 @@
 ####
 
 team_name = 'Koala' # Only 10 chars displayed.
-strategy_name = '2Alternates(x2)'
-strategy_description = '''This strategy will collude two times in a row, then betray two times as 
-the first alternation. The second alternation would be a simple collude then betray. Then both 
-alternation will happen on repeat.'''
+strategy_name = 'NumControl'
+strategy_description = '''This strategy will collude or betray based on whether 
+or not the length is divisble by 2 or 3. If the length is divisible by neither 
+then the program will randomly choose collude or betray.'''
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -19,10 +19,15 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-    if len(my_history)%2 == 0"
+    choices = ['c', 'b']
+    rand_choice = random.choice(choices)
+    
+    if len(my_history)%2 == 0:
         return 'c'
-    else:
+    elif len(my_history)%3 == 0:
         return 'b'
+    else:
+        return rand_choice
 
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
